@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0a1628;
+  --navy-light: #132038;
+  --charcoal: #2c3e50;
+  --slate: #475b6f;
+  --silver: #94a3b8;
+  --white: #ffffff;
+  --off-white: #f8fafc;
+  --ice: #e2e8f0;
+  --accent: #3b82c8;
+  --accent-hover: #2563a8;
+
+  --font-sans: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-serif: "Playfair Display", "Times New Roman", serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  @apply bg-navy text-white antialiased;
+  font-family: var(--font-sans);
+}
+
+main {
+  @apply bg-navy;
+}
+
+a {
+  @apply text-accent underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy;
+}
+
+section {
+  @apply py-24 sm:py-16;
+}
+
+.section-light {
+  @apply bg-off-white text-charcoal;
+}
+
+.section-dark {
+  @apply bg-navy text-white;
+}
+
+.section-muted {
+  @apply bg-navy-light text-white;
+}
+
+.heading-serif {
+  @apply font-serif;
+}
+
+.body-text {
+  @apply text-sm sm:text-base leading-relaxed text-slate;
+}
+
+.card {
+  @apply border border-ice/60 rounded-md bg-navy-light/40;
+}
+
+.card-light {
+  @apply border border-ice rounded-md bg-white;
+}
+
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy;
+}
+
