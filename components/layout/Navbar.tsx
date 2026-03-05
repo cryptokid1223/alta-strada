@@ -45,10 +45,10 @@ export function Navbar() {
         >
           <div className="relative h-10 w-10 flex-shrink-0">
             <Image
-              src="/images/logo-icon.svg"
-              alt=""
-              width={44}
-              height={44}
+              src="/images/logo-icon.png"
+              alt="Alta Strada Consulting"
+              width={40}
+              height={40}
               className="object-contain"
             />
           </div>

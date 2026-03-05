@@ -14,8 +14,8 @@ export function Footer() {
           <div className="flex flex-col gap-2">
             <div className="relative h-10 w-[180px]">
               <Image
-                src="/images/logo.svg"
-                alt={COMPANY.name}
+                src="/images/logo.png"
+                alt="Alta Strada Consulting"
                 width={180}
                 height={40}
                 className="object-contain object-left"

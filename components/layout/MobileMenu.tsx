@@ -61,8 +61,8 @@ export function MobileMenu() {
               <div className="flex h-16 items-center justify-between border-b border-gray-100 px-6">
                 <div className="relative h-8 w-8">
                   <Image
-                    src="/images/logo-icon.svg"
-                    alt=""
+                    src="/images/logo-icon.png"
+                    alt="Alta Strada Consulting"
                     width={32}
                     height={32}
                     className="object-contain"
