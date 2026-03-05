@@ -63,8 +63,8 @@ export function CompanyOverview() {
           </FadeIn>
           <motion.div
             className="relative flex items-center justify-center"
-            initial={reduceMotion ? false : { opacity: 0, x: 40 }}
-            whileInView={reduceMotion ? false : { opacity: 1, x: 0 }}
+            initial={reduceMotion ? undefined : { opacity: 0, x: 40 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
