@@ -7,9 +7,9 @@ import { CTASection } from "@/components/home/CTASection";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `${COMPANY.name} | ${COMPANY.tagline}`,
+  title: "Home",
   description:
-    "Alta Strada Consulting Inc. is an established medical sales consulting firm representing biologics and hardware manufacturers to orthopedic surgeons, podiatrists, and neurosurgeons."
+    "Alta Strada Consulting provides strategic medical sales representation for biologics and hardware manufacturers serving orthopedic surgeons, podiatrists, and neurosurgeons."
 };
 
 export default function HomePage() {
@@ -23,4 +23,3 @@ export default function HomePage() {
     </>
   );
 }
-

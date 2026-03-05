@@ -1,5 +1,5 @@
 export const COMPANY = {
-  name: "Alta Strada Consulting Inc.",
+  name: "Alta Strada Consulting, Inc.",
   tagline: "Strategic Medical Sales Representation",
   email: "info@altastradaconsulting.com",
   address: "",
@@ -22,7 +22,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     title: "Principal",
     territory: "Primary Territory",
     bio: "Experienced medical device sales professional focused on long-term surgeon and manufacturer partnerships.",
-    image: "/images/team/representative.jpg"
+    image: "/images/team/placeholder.svg"
   }
 ];
 
@@ -36,7 +36,7 @@ export type Manufacturer = {
 export const MANUFACTURERS: Manufacturer[] = [
   {
     name: "Manufacturer Name",
-    logo: "/images/manufacturers/manufacturer.svg",
+    logo: "/images/manufacturers/placeholder.svg",
     category: "Biologics — Bone Grafting & Regenerative Solutions",
     description:
       "Representation focused on clinically driven biologic solutions for orthopedic, podiatric, and neurosurgical applications."
@@ -95,12 +95,15 @@ export const SPECIALTIES: Specialty[] = [
 export type CredibilityStat = {
   label: string;
   value: string;
+  /** For animated counter; omit for non-numeric (e.g. territory name) */
+  numericValue?: number;
+  suffix?: string;
 };
 
 export const CREDIBILITY_STATS: CredibilityStat[] = [
-  { label: "Years of Representation", value: "15+" },
-  { label: "Manufacturer Partners", value: "Select biologics and hardware leaders" },
-  { label: "Territories Covered", value: "Regional coverage" },
-  { label: "Surgeon Relationships", value: "Established, long-term partnerships" }
+  { label: "Years Experience", value: "15+", numericValue: 15, suffix: "+" },
+  { label: "Surgeon Partnerships", value: "50+", numericValue: 50, suffix: "+" },
+  { label: "Surgical Specialties", value: "3", numericValue: 3 },
+  { label: "Territory", value: "Southeast" }
 ];
 

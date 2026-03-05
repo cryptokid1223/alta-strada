@@ -9,23 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        navy: "#0A1628",
-        "navy-light": "#132038",
-        charcoal: "#2C3E50",
-        slate: "#475B6F",
-        silver: "#94A3B8",
+        blue: {
+          primary: "#1E6FC4",
+          dark: "#0D3B7A",
+          deeper: "#091F48",
+          light: "#3A8FE2",
+          pale: "#E8F1FB",
+          wash: "#F2F7FD"
+        },
+        gray: {
+          50: "#F5F7FA",
+          100: "#E9ECF1",
+          200: "#D1D5DB",
+          400: "#8896A6",
+          600: "#4A5568",
+          800: "#1E293B",
+          900: "#0F172A"
+        },
+        silver: "#A8B4C0",
+        "silver-light": "#C8D0D8",
         white: "#FFFFFF",
-        "off-white": "#F8FAFC",
-        ice: "#E2E8F0",
-        accent: "#3B82C8",
-        "accent-hover": "#2563A8"
+        "off-white": "#FAFBFD"
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        serif: ["var(--font-serif)", "Georgia", "serif"]
+        heading: ["var(--font-heading)", "Georgia", "serif"]
       },
       maxWidth: {
-        "content": "1200px"
+        content: "1200px"
+      },
+      boxShadow: {
+        "nav-scrolled": "0 1px 3px rgba(0,0,0,0.08)",
+        "card-hover": "0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)"
       }
     }
   },
@@ -33,4 +48,3 @@ const config: Config = {
 };
 
 export default config;
-

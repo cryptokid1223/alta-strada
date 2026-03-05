@@ -2,9 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { COMPANY } from "@/lib/constants";
+import { staggerContainer, fadeInUp } from "@/lib/animations";
 
 const links = [
   { href: "/", label: "Home" },
@@ -17,56 +21,107 @@ const links = [
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
 
   return (
     <div className="md:hidden">
       <button
         type="button"
-        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+        aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-md border border-ice/60 bg-navy-light/60 text-silver"
+        className="flex h-10 w-10 items-center justify-center rounded-md text-gray-600 transition-colors hover:text-blue-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-primary focus-visible:ring-offset-2"
       >
-        <span className="sr-only">Toggle navigation</span>
-        <span
-          aria-hidden="true"
-          className="flex flex-col items-center justify-center gap-1"
-        >
-          <span className="h-[2px] w-4 bg-silver" />
-          <span className="h-[2px] w-4 bg-silver" />
-        </span>
+        {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
-      {open && (
-        <div className="fixed inset-x-0 top-16 z-40 border-b border-ice/60 bg-navy-light/95 backdrop-blur">
-          <nav className="mx-auto flex max-w-content flex-col gap-1 px-6 pb-6 pt-3 text-sm">
-            <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.16em] text-silver">
-              {COMPANY.name}
-            </p>
-            {links.map((link) => {
-              const isActive =
-                link.href === "/"
-                  ? pathname === "/"
-                  : pathname?.startsWith(link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
+
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2 }}
+              className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"
+              aria-hidden
+              onClick={() => setOpen(false)}
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{
+                type: "tween",
+                duration: reduceMotion ? 0 : 0.3,
+                ease: [0.25, 0.1, 0.25, 1]
+              }}
+              className="fixed right-0 top-0 z-50 h-full w-full max-w-sm bg-white shadow-xl"
+            >
+              <div className="flex h-16 items-center justify-between border-b border-gray-100 px-6">
+                <div className="relative h-8 w-8">
+                  <Image
+                    src="/images/logo-icon.svg"
+                    alt=""
+                    width={32}
+                    height={32}
+                    className="object-contain"
+                  />
+                </div>
+                <button
+                  type="button"
                   onClick={() => setOpen(false)}
-                  className={cn(
-                    "flex items-center justify-between rounded-md px-2.5 py-2 text-silver hover:bg-navy focus-ring",
-                    isActive && "text-white"
-                  )}
+                  aria-label="Close menu"
+                  className="flex h-10 w-10 items-center justify-center rounded-md text-gray-600 hover:text-blue-primary"
                 >
-                  <span>{link.label}</span>
-                  {isActive && (
-                    <span className="h-px w-8 bg-accent" aria-hidden="true" />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
-      )}
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+              <motion.nav
+                className="flex flex-col gap-1 px-6 py-6"
+                variants={reduceMotion ? undefined : staggerContainer}
+                initial="hidden"
+                animate="visible"
+              >
+                {links.map((link) => {
+                  const isActive =
+                    link.href === "/"
+                      ? pathname === "/"
+                      : pathname?.startsWith(link.href);
+                  return (
+                    <motion.div
+                      key={link.href}
+                      variants={reduceMotion ? undefined : fadeInUp}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                          "block rounded-md px-4 py-3 text-base font-medium transition-colors",
+                          isActive
+                            ? "bg-blue-pale text-blue-primary"
+                            : "text-gray-600 hover:bg-gray-50 hover:text-blue-primary"
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+                <motion.div variants={reduceMotion ? undefined : fadeInUp}>
+                  <Link
+                    href="/contact"
+                    onClick={() => setOpen(false)}
+                    className="mt-4 block rounded-md bg-blue-primary px-4 py-3 text-center text-base font-medium text-white transition-colors hover:bg-blue-dark"
+                  >
+                    Contact Us
+                  </Link>
+                </motion.div>
+              </motion.nav>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
-

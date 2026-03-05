@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display } from "next/font/google";
+import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import { COMPANY } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AnalyticsScript } from "@/components/layout/AnalyticsScript";
+import { BackToTop } from "@/components/ui/BackToTop";
 
 const sans = DM_Sans({
   subsets: ["latin"],
@@ -13,10 +14,10 @@ const sans = DM_Sans({
   display: "swap"
 });
 
-const serif = Playfair_Display({
+const heading = DM_Serif_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-serif",
+  weight: ["400"],
+  variable: "--font-heading",
   display: "swap"
 });
 
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     template: `%s | ${COMPANY.name}`
   },
   description:
-    "Alta Strada Consulting Inc. provides strategic medical sales representation for biologics and hardware manufacturers serving orthopedic surgeons, podiatrists, and neurosurgeons.",
+    "Alta Strada Consulting provides strategic medical sales representation for biologics and hardware manufacturers serving orthopedic surgeons, podiatrists, and neurosurgeons.",
   metadataBase: new URL(siteUrl),
   openGraph: {
     type: "website",
@@ -61,11 +62,13 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
-      <body className="bg-navy text-white">
+    <html lang="en" className={`${sans.variable} ${heading.variable}`}>
+      <body className="min-h-screen bg-off-white text-gray-800">
+        <div className="h-1 w-full bg-gradient-to-r from-blue-primary via-blue-light to-transparent" />
         <Navbar />
-        <main>{children}</main>
+        <main className="pt-16">{children}</main>
         <Footer />
+        <BackToTop />
         <AnalyticsScript />
         <script
           type="application/ld+json"
@@ -76,4 +79,3 @@ export default function RootLayout({
     </html>
   );
 }
-

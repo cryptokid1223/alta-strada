@@ -3,26 +3,38 @@
 @tailwind utilities;
 
 :root {
-  --navy: #0a1628;
-  --navy-light: #132038;
-  --charcoal: #2c3e50;
-  --slate: #475b6f;
-  --silver: #94a3b8;
-  --white: #ffffff;
-  --off-white: #f8fafc;
-  --ice: #e2e8f0;
-  --accent: #3b82c8;
-  --accent-hover: #2563a8;
+  /* Blues — from logo */
+  --blue-primary: #1e6fc4;
+  --blue-dark: #0d3b7a;
+  --blue-deeper: #091f48;
+  --blue-light: #3a8fe2;
+  --blue-pale: #e8f1fb;
+  --blue-wash: #f2f7fd;
 
-  --font-sans: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  --font-serif: "Playfair Display", "Times New Roman", serif;
+  /* Neutrals */
+  --white: #ffffff;
+  --off-white: #fafbfd;
+  --gray-50: #f5f7fa;
+  --gray-100: #e9ecf1;
+  --gray-200: #d1d5db;
+  --gray-400: #8896a6;
+  --gray-600: #4a5568;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+
+  /* Metallic silver — for subtle accents matching logo */
+  --silver: #a8b4c0;
+  --silver-light: #c8d0d8;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -32,51 +44,23 @@ body {
 }
 
 body {
-  @apply bg-navy text-white antialiased;
+  @apply bg-off-white text-gray-800 antialiased;
   font-family: var(--font-sans);
 }
 
 main {
-  @apply bg-navy;
+  @apply bg-off-white;
 }
 
 a {
-  @apply text-accent underline-offset-4 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy;
+  @apply text-blue-primary underline-offset-4 transition-colors hover:text-blue-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-primary focus-visible:ring-offset-2;
 }
 
-section {
-  @apply py-24 sm:py-16;
+.font-heading {
+  font-family: var(--font-heading);
 }
 
-.section-light {
-  @apply bg-off-white text-charcoal;
+/* Section label pattern: small uppercase above headings */
+.section-label {
+  @apply text-sm font-semibold uppercase tracking-widest text-blue-primary;
 }
-
-.section-dark {
-  @apply bg-navy text-white;
-}
-
-.section-muted {
-  @apply bg-navy-light text-white;
-}
-
-.heading-serif {
-  @apply font-serif;
-}
-
-.body-text {
-  @apply text-sm sm:text-base leading-relaxed text-slate;
-}
-
-.card {
-  @apply border border-ice/60 rounded-md bg-navy-light/40;
-}
-
-.card-light {
-  @apply border border-ice rounded-md bg-white;
-}
-
-.focus-ring {
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy;
-}
-

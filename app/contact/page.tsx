@@ -1,83 +1,79 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
-import { FadeIn } from "@/components/ui/FadeIn";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { FadeIn } from "@/components/ui/FadeIn";
 import { COMPANY } from "@/lib/constants";
+import { Mail, MapPin, Linkedin } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: `Contact | ${COMPANY.name}`,
+  title: "Contact",
   description:
-    "Contact Alta Strada Consulting Inc. to discuss manufacturer representation or to learn more about the biologics and hardware products we support."
+    "Contact Alta Strada Consulting to discuss manufacturer representation or learn more about the products we support."
 };
 
 export default function ContactPage() {
   return (
-    <section className="section-dark">
-      <Container>
-        <FadeIn className="grid gap-10 md:grid-cols-3">
-          <div className="md:col-span-2">
-            <h1 className="heading-serif text-3xl sm:text-4xl font-semibold text-white">
-              Get in touch
-            </h1>
-            <p className="mt-4 max-w-xl text-sm sm:text-base text-slate">
-              Whether you are a manufacturer seeking representation or a practice looking
-              to learn more about the products we support, Alta Strada Consulting
-              welcomes a straightforward conversation.
-            </p>
-            <div className="mt-8">
+    <>
+      <section className="bg-blue-wash py-20 md:py-28">
+        <div className="mx-auto max-w-content px-6 sm:px-8">
+          <p className="section-label mb-4">Contact</p>
+          <h1 className="font-heading text-5xl font-normal text-gray-900 md:text-6xl">
+            Get in Touch
+          </h1>
+          <p className="mt-6 max-w-2xl text-base text-gray-600 md:text-lg">
+            Whether you are a manufacturer seeking representation or a practice
+            looking to learn more, we would like to hear from you.
+          </p>
+        </div>
+      </section>
+      <section className="bg-white py-24 md:py-28">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
+            <FadeIn className="lg:col-span-3">
               <ContactForm />
-            </div>
-          </div>
-          <aside className="space-y-5 text-sm text-silver">
-            <div>
-              <h2 className="heading-serif text-base font-semibold text-white">
-                Contact details
-              </h2>
-              <ul className="mt-3 space-y-1 text-sm">
+            </FadeIn>
+            <aside className="lg:col-span-2">
+              <FadeIn className="space-y-6">
+                <h2 className="font-heading text-xl font-normal text-gray-900">
+                  Contact details
+                </h2>
                 {COMPANY.email && (
-                  <li>
-                    <span className="font-medium text-white">Email: </span>
-                    <a
-                      href={`mailto:${COMPANY.email}`}
-                      className="text-accent hover:text-accent-hover focus-ring"
-                    >
-                      {COMPANY.email}
-                    </a>
-                  </li>
-                )}
-                {COMPANY.address && (
-                  <li>
-                    <span className="font-medium text-white">Address: </span>
-                    <span>{COMPANY.address}</span>
-                  </li>
+                  <a
+                    href={`mailto:${COMPANY.email}`}
+                    className="flex items-center gap-3 text-gray-600 transition-colors hover:text-blue-primary"
+                  >
+                    <Mail className="h-5 w-5 text-blue-primary" />
+                    <span>{COMPANY.email}</span>
+                  </a>
                 )}
                 {COMPANY.territory && (
-                  <li>
-                    <span className="font-medium text-white">Territory: </span>
+                  <p className="flex items-center gap-3 text-gray-600">
+                    <MapPin className="h-5 w-5 text-blue-primary" />
                     <span>{COMPANY.territory}</span>
-                  </li>
+                  </p>
                 )}
-              </ul>
-            </div>
-            {COMPANY.linkedin && (
-              <div>
-                <h2 className="heading-serif text-base font-semibold text-white">
-                  LinkedIn
-                </h2>
-                <a
-                  href={COMPANY.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-2 inline-flex text-accent hover:text-accent-hover focus-ring"
-                >
-                  View company page
-                </a>
-              </div>
-            )}
-          </aside>
-        </FadeIn>
-      </Container>
-    </section>
+                {COMPANY.address && (
+                  <p className="flex items-center gap-3 text-gray-600">
+                    <MapPin className="h-5 w-5 text-blue-primary" />
+                    <span>{COMPANY.address}</span>
+                  </p>
+                )}
+                {COMPANY.linkedin && (
+                  <a
+                    href={COMPANY.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-3 text-gray-600 transition-colors hover:text-blue-primary"
+                  >
+                    <Linkedin className="h-5 w-5 text-blue-primary" />
+                    <span>LinkedIn</span>
+                  </a>
+                )}
+              </FadeIn>
+            </aside>
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }
-

@@ -1,0 +1,81 @@
+You are rebuilding the website for Alta Strada Consulting, Inc. — a medical device sales consulting firm representing biologics and hardware companies to orthopedic surgeons, podiatrists, and neurosurgeons.
+
+This is a COMPLETE visual redesign. The old dark/navy design was too bland. The new design is: white/light base, blue accents from the logo, real animations, visual depth, modern and polished. Think premium consulting firm, not hospital website.
+
+## Tech Stack
+- Next.js 14+ App Router, TypeScript strict mode, Tailwind CSS
+- Framer Motion for animations (staggered reveals, scroll animations, hover effects, counters)
+- React Hook Form for contact form
+- next/font/google for typography, next/image for all images
+- Server components by default. "use client" only when needed.
+
+## Color Palette (from the logo)
+--blue-primary: #1E6FC4 (main accent — buttons, links, highlights)
+--blue-dark: #0D3B7A (deep navy — header text, footer bg)
+--blue-deeper: #091F48 (darkest — footer)
+--blue-light: #3A8FE2 (hover states)
+--blue-pale: #E8F1FB (card backgrounds, subtle sections)
+--blue-wash: #F2F7FD (faint blue alternating section bg)
+--white: #FFFFFF
+--off-white: #FAFBFD (page bg)
+--gray-50: #F5F7FA
+--gray-100: #E9ECF1 (borders)
+--gray-400: #8896A6 (muted text)
+--gray-600: #4A5568 (body text)
+--gray-800: #1E293B (headings)
+
+White base. Blue accent. No neon, no gradients on buttons, no dark theme (only footer + stats bar are dark).
+
+## Typography
+- Headings: DM Serif Display (serif, authoritative)
+- Body/UI: DM Sans (clean sans-serif)
+- Never use Inter, Roboto, Arial, or system fonts.
+- Every section has a small uppercase label above the heading: text-sm, tracking-wide, uppercase, text-blue-primary, font-semibold.
+
+## Animation Rules (Framer Motion — USE EXTENSIVELY)
+- Every section fades + slides up on scroll (whileInView, viewport once)
+- Card grids use staggered children (staggerChildren: 0.12)
+- All cards have hover: scale(1.02), shadow deepens, translateY(-4px)
+- Buttons: hover darkens bg, subtle lift
+- Stats section: animated counters that count up on scroll
+- Hero: staggered entrance (label → heading → text → button, 150ms delay each)
+- Nav: transparent → solid white + shadow on scroll (0.3s transition)
+- Hero scroll indicator: small bouncing chevron at bottom
+- Import shared variants from lib/animations.ts — do NOT define inline everywhere
+- Respect prefers-reduced-motion
+
+## Layout Rules
+- Max 1200px content width, centered
+- 96px section padding desktop, 64px mobile
+- Generous whitespace
+- Section backgrounds alternate: white → blue-wash/gray-50 → white
+- Use subtle curved SVG dividers between at least 2-3 sections
+- Thin 3-4px blue gradient line at very top of page above nav
+- Cards: rounded-lg, shadow-sm default, shadow-lg on hover, never flat
+
+## Logo
+- Navbar: Icon mark (A) at 40px + "ALTA STRADA" as styled text in blue-dark
+- Footer: Full logo on dark background
+- Favicon: Just the A icon mark
+
+## Pages: Home, About, Portfolio, Specialties, Contact
+See the full redesign prompt document for detailed page-by-page layouts.
+
+## Code Standards
+- TypeScript strict — no `any`
+- Functional components with explicit prop types
+- cn() utility (clsx + tailwind-merge) for conditional classes
+- Tailwind only — no CSS modules, no styled-components
+- Semantic HTML (section, nav, main, header, footer — not divs for everything)
+- All images have alt text, all interactive elements have focus states
+- Content lives in lib/constants.ts, animation variants in lib/animations.ts
+
+## NEVER
+- Stock medical photos (no stethoscopes, handshakes, smiling nurses)
+- Pricing, SKUs, or proprietary manufacturer info
+- Carousels, sliders, chatbots, pop-ups
+- Dark theme for main content (only footer + stats bar)
+- Flat cards with no hover states
+- Static, lifeless sections with no scroll animation
+- SaaS / startup aesthetic
+- Lorem ipsum

@@ -1,7 +1,11 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { MobileMenu } from "@/components/layout/MobileMenu";
-import { COMPANY } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -12,51 +16,84 @@ const links = [
   { href: "/contact", label: "Contact" }
 ];
 
+const SCROLL_THRESHOLD = 80;
+
 export function Navbar() {
-  // Static navy background to keep things understated and consistent.
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    onScroll(); // init
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 border-b border-ice/40 bg-navy/95 backdrop-blur">
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled
+          ? "bg-white shadow-nav-scrolled"
+          : "bg-transparent"
+      )}
+    >
       <Container className="flex h-16 items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2 focus-ring">
-            {/* Logo placeholder; replace src with actual logo in /public/images/logo.svg */}
-            <div className="flex h-8 w-8 items-center justify-center rounded-sm border border-ice/70 bg-navy-light text-[10px] font-semibold tracking-[0.16em] text-silver">
-              AS
-            </div>
-            <div className="flex flex-col">
-              <span className="heading-serif text-sm font-semibold text-white">
-                Alta Strada
-              </span>
-              <span className="text-[11px] text-silver">
-                Strategic Medical Sales
-              </span>
-            </div>
-          </Link>
-        </div>
+        <Link
+          href="/"
+          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-primary focus-visible:ring-offset-2 rounded-md"
+        >
+          <div className="relative h-10 w-10 flex-shrink-0">
+            <Image
+              src="/images/logo-icon.svg"
+              alt=""
+              width={44}
+              height={44}
+              className="object-contain"
+            />
+          </div>
+          <span className="font-heading text-lg font-normal tracking-wide text-blue-dark whitespace-nowrap">
+            ALTA STRADA
+          </span>
+        </Link>
+
         <nav className="hidden items-center gap-8 text-sm md:flex">
           {links
-            .filter((link) => link.href !== "/contact")
-            .map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-silver transition-colors hover:text-white focus-ring"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+            .filter((l) => l.href !== "/contact")
+            .map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname?.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "relative font-medium transition-colors text-gray-600 hover:text-blue-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-primary focus-visible:ring-offset-2 rounded",
+                    isActive && "text-blue-primary"
+                  )}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-primary rounded-full"
+                      aria-hidden
+                    />
+                  )}
+                </Link>
+              );
+            })}
           <Link
             href="/contact"
-            className="focus-ring inline-flex items-center justify-center rounded-md border border-transparent bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+            className="inline-flex items-center justify-center rounded-md bg-blue-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-primary focus-visible:ring-offset-2"
           >
             Contact Us
           </Link>
         </nav>
+
         <MobileMenu />
       </Container>
     </header>
   );
 }
-

@@ -2,37 +2,43 @@ import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type SectionHeadingProps = {
-  eyebrow?: string;
-  title: string;
+  label: string;
+  title: ReactNode;
   subtitle?: ReactNode;
   alignment?: "left" | "center";
   className?: string;
 };
 
 export function SectionHeading({
-  eyebrow,
+  label,
   title,
   subtitle,
-  alignment = "left",
+  alignment = "center",
   className
 }: SectionHeadingProps) {
   const alignClass =
-    alignment === "center" ? "items-center text-center" : "items-start text-left";
+    alignment === "center"
+      ? "items-center text-center mx-auto"
+      : "items-start text-left";
 
   return (
-    <div className={cn("mb-10 flex flex-col gap-3", alignClass, className)}>
-      {eyebrow && (
-        <p className="text-xs font-medium uppercase tracking-[0.16em] text-silver">
-          {eyebrow}
-        </p>
+    <div
+      className={cn(
+        "mb-10 flex flex-col gap-3 max-w-3xl",
+        alignClass,
+        alignment === "center" && "max-w-3xl",
+        className
       )}
-      <h2 className="heading-serif text-2xl sm:text-3xl font-semibold text-white">
+    >
+      <p className="section-label">{label}</p>
+      <h2 className="font-heading text-3xl md:text-4xl font-normal text-gray-900">
         {title}
       </h2>
       {subtitle && (
-        <div className="max-w-2xl text-sm sm:text-base text-slate">{subtitle}</div>
+        <p className="text-base md:text-lg leading-relaxed text-gray-600">
+          {subtitle}
+        </p>
       )}
     </div>
   );
 }
-
