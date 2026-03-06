@@ -63,17 +63,18 @@ export function CompanyOverview() {
           </FadeIn>
           <motion.div
             className="relative flex items-center justify-center"
-            initial={reduceMotion ? undefined : { opacity: 0, x: 40 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+            initial={reduceMotion ? undefined : { opacity: 0 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <div className="relative h-64 w-full max-w-md rounded-lg bg-blue-pale/50 lg:h-80">
+            <div className="relative h-64 w-full lg:h-80">
               <Image
-                src="/images/logo.svg"
-                alt=""
+                src="/images/about-image.png"
+                alt="Alta Strada Consulting"
                 fill
-                className="object-contain p-12 opacity-20"
+                sizes="(max-width: 1023px) 100vw, 50vw"
+                className="object-contain"
               />
             </div>
           </motion.div>
