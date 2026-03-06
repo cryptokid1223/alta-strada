@@ -68,7 +68,7 @@ export function CompanyOverview() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <div className="relative h-64 w-full lg:h-80">
+            <div className="relative h-80 w-full lg:h-[28rem]">
               <Image
                 src="/images/about-image.png"
                 alt="Alta Strada Consulting"
