@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -22,51 +23,91 @@ const item = {
   }
 };
 
+const imageVariants = {
+  hidden: { opacity: 0, x: 40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1],
+      delay: 0.5
+    }
+  }
+};
+
 export function Hero() {
   const reduceMotion = useReducedMotion();
 
   return (
     <section className="relative overflow-hidden bg-blue-wash pt-16 pb-24 md:pt-24 md:pb-32">
       <Container>
-        <motion.div
-          className="relative z-10 max-w-3xl"
-          variants={reduceMotion ? undefined : stagger}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.p
-            variants={item}
-            className="section-label mb-4"
-          >
-            Strategic Medical Sales Representation
-          </motion.p>
-          <motion.h1
-            variants={item}
-            className="font-heading text-5xl font-normal leading-tight text-gray-900 md:text-6xl"
-          >
-            Trusted Representation for Leading Medical Companies
-          </motion.h1>
-          <motion.p
-            variants={item}
-            className="mt-6 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg"
-          >
-            Alta Strada Consulting represents biologics and hardware manufacturers
-            to orthopedic surgeons, podiatrists, and neurosurgeons. We combine
-            disciplined territory management with clinical knowledge and
-            long-term surgeon relationships.
-          </motion.p>
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 lg:items-center">
+          {/* Text column ~55% */}
           <motion.div
-            variants={item}
-            className="mt-8 flex flex-wrap gap-4"
+            className="relative z-10 lg:col-span-7"
+            variants={reduceMotion ? undefined : stagger}
+            initial="hidden"
+            animate="visible"
           >
-            <Button asChild>
-              <Link href="/contact">Partner With Us</Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="/about">Learn More</Link>
-            </Button>
+            <motion.p
+              variants={item}
+              className="section-label mb-4"
+            >
+              Strategic Medical Sales Representation
+            </motion.p>
+            <motion.h1
+              variants={item}
+              className="font-heading text-5xl font-normal leading-tight text-gray-900 md:text-6xl"
+            >
+              Trusted Representation for Leading Medical Companies
+            </motion.h1>
+            <motion.p
+              variants={item}
+              className="mt-6 max-w-xl text-base leading-relaxed text-gray-600 md:text-lg"
+            >
+              Alta Strada Consulting represents biologics and hardware manufacturers
+              to orthopedic surgeons, podiatrists, and neurosurgeons. We combine
+              disciplined territory management with clinical knowledge and
+              long-term surgeon relationships.
+            </motion.p>
+            <motion.div
+              variants={item}
+              className="mt-8 flex flex-wrap gap-4"
+            >
+              <Button asChild>
+                <Link href="/contact">Partner With Us</Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href="/about">Learn More</Link>
+              </Button>
+            </motion.div>
           </motion.div>
-        </motion.div>
+
+          {/* Hero image column ~45% */}
+          <motion.div
+            className="relative z-10 lg:col-span-5"
+            variants={reduceMotion ? undefined : imageVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-blue-primary/10 shadow-xl">
+              <Image
+                src="/images/hero-image.png"
+                alt="Alta Strada Consulting — strategic medical sales representation"
+                fill
+                sizes="(max-width: 1023px) 100vw, 45vw"
+                className="object-cover"
+                priority
+              />
+              {/* Subtle blue-tinted overlay */}
+              <div
+                className="absolute inset-0 rounded-lg bg-blue-primary/5 pointer-events-none"
+                aria-hidden
+              />
+            </div>
+          </motion.div>
+        </div>
 
         {/* Decorative: subtle gradient blob */}
         <div
